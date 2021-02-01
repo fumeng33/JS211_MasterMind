@@ -28,13 +28,71 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-const generateHint = () =>  {
+const generateHint = (guess) =>  {
   // your code here
-}
+  
+  // go through each index to match the solution 
+  // the hint should output two numbers ex. 2-2 
+
+  // declare two array that generationg hing function 
+  let arraySolution = solution.split("")
+  let arrayGuess = guess.split("")
+  // console.log(arraySolution.length)
+  // console.log(arrayGuess.length)
+  let rightPlace = 0
+  let rightLetter = 0
+
+// repeat this as many times 
+// 0123(index)
+// abcd (solution)
+// ADBC (guess) 
+// taking i to loop around 
+  for(let i = 0; i < arraySolution.length; i++){
+    if (arraySolution[i] == arrayGuess[i]){
+      rightPlace++
+      arraySolution[i] = null
+      // console.log(convertSolution)
+    }
+  }
+// counting the right letter placement 
+  for (let i = 0; i < arraySolution.length; i++){
+    let index = arraySolution.indexOf(arrayGuess[i])
+       if(index >= 0){
+         rightLetter++
+         arraySolution[index] = null
+       } 
+      }
+       return `${rightPlace}-${rightLetter}`;
+ }
+
 
 const mastermind = (guess) => {
-  solution = 'abcd'; // Comment this out to generate a random solution
+  // solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
+// check if the user guess correctly 
+  if (solution == guess){
+    console.log('You guessed it!')
+    return 'You guessed it!'
+  }
+
+  let hint = generateHint(guess);
+  
+board.push(`Guess:${guess}, Hint:${hint}`)
+
+if (board.length > 9) {
+  
+  console.log(`YOU RAN OUT OF TURNS! THE ANSWER IS ${solution}`)
+  return `YOU RAN OUT OF TURNS! THE ANSWER IS ${solution}`;
+}
+// check if the user guess correctly,
+// if they did, print out that they won
+
+// if they did not win, generate the hint 
+//print out the hint,
+
+// if they have guessed 10 times so far, then tell he the answer, 
+// keep track of how many times they played 
+
 }
 
 
